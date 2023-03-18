@@ -1,7 +1,7 @@
 package com.kaylayshi.data.requests
 import kotlinx.serialization.Serializable
 /**
- *  model for registration
+ *  Register params for [User]
  */
 @Serializable
 data class RegisterRequest(
