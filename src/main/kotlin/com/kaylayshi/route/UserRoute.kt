@@ -1,5 +1,6 @@
 package com.kaylayshi.route
 
+import com.kaylayshi.authentication.JwtService
 import com.kaylayshi.data.model.User
 import com.kaylayshi.data.requests.RegisterRequest
 import com.kaylayshi.data.response.SimpleResponse
@@ -12,6 +13,7 @@ import io.ktor.server.routing.*
 
 fun Route.userRoute(
     db: AuthRepo,
+    jwtService: JwtService,
     hashFunction: (String) -> String,
 ) {
 
@@ -31,7 +33,7 @@ fun Route.userRoute(
                 password = hashFunction(registerRequest.password)
             )
             db.addUser(user)
-            call.respond(HttpStatusCode.OK, SimpleResponse(true, "user created successfully"))
+            call.respond(HttpStatusCode.OK, SimpleResponse(true, jwtService.generateToken(user)))
         } catch (e: Exception) {
             call.respond(HttpStatusCode.Conflict, SimpleResponse(true, e.message ?: "An error occurred"))
         }
