@@ -1,0 +1,1 @@
+rootProject.name = "com.kaylayshi.note-application"
