@@ -1,5 +1,6 @@
 package com.kaylayshi.repository
 
+import com.kaylayshi.data.table.NoteTable
 import com.kaylayshi.data.table.UserTable
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
@@ -17,6 +18,7 @@ object DatabaseFactory {
         transaction {
             // create user's table if it doesn't exist
             SchemaUtils.create(UserTable)
+            SchemaUtils.create(NoteTable)
         }
     }
 
